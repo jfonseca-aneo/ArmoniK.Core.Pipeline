@@ -87,11 +87,11 @@ _usage:
   EOF
 
 # Custom command to build a single image
-build $imageTag $dockerFile:
-  docker build -t "$imageTag" -f "$dockerFile" ./
+build $imageTag:
+  docker build -t "$imageTag"  ./
 
 # Build all images necessary for the deployment 
-build-all: (build ARMONIK_WORKER ARMONIK_WORKER_DOCKER_FILE) (build ARMONIK_METRICS "./Control/Metrics/src/Dockerfile") (build ARMONIK_PARTITIONMETRICS "./Control/PartitionMetrics/src/Dockerfile") (build ARMONIK_SUBMITTER "./Control/Submitter/src/Dockerfile") (build ARMONIK_POLLINGAGENT "./Compute/PollingAgent/src/Dockerfile")
+build-all: (build ARMONIK_WORKER) (build ARMONIK_METRICS) (build ARMONIK_PARTITIONMETRICS) (build ARMONIK_SUBMITTER) (build ARMONIK_POLLINGAGENT)
 
 # Insert partitions in database
 set-partitions:
