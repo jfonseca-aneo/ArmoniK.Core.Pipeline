@@ -9,9 +9,6 @@ on:
 
 jobs:
   testStreamDC:
-    needs:
-      - versionning
-      - buildImages
     env:
       VERSION: ${{ github.event.inputs.tag  }}
     runs-on: ubuntu-latest
@@ -65,11 +62,8 @@ jobs:
           reporter: dotnet-trx
 
   testHtcMockDC:
-    needs:
-      - versionning
-      - buildImages
     env:
-      VERSION: ${{ needs.versionning.outputs.version }}
+      VERSION: ${{ github.event.inputs.tag }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -159,11 +153,8 @@ jobs:
             dockerhubaneo/armonik_core_htcmock_test_client:$VERSION
 
   runBench:
-    needs:
-      - versionning
-      - buildImages
     env:
-      VERSION: ${{ needs.versionning.outputs.version }}
+      VERSION: ${{ github.event.inputs.tag }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -225,11 +216,8 @@ jobs:
             dockerhubaneo/armonik_core_bench_test_client:$VERSION
 
   defaultPartitionMock:
-    needs:
-      - versionning
-      - buildImages
     env:
-      VERSION: ${{ needs.versionning.outputs.version }}
+      VERSION: ${{ github.event.inputs.tag }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -267,11 +255,8 @@ jobs:
           ls -la docker-compose/logs/*.json
 
   healthCheckTest:
-    needs:
-      - versionning
-      - buildImages
     env:
-      VERSION: ${{ needs.versionning.outputs.version }}
+      VERSION: ${{ github.event.inputs.tag }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
