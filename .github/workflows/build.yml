@@ -24,10 +24,13 @@ jobs:
           - Verbose
     name: HtcMock ${{ matrix.queue }} ${{ matrix.log-level }}
     steps:
-      - name: Machine Info
+      - name: Memory Info
         run: |
           cat /proc/meminfo
-          cat /proc/cpuinfo
+          free -g
+      - name: CPU Info
+        run: |
+          cat /proc/meminfo
       - name: Checkout
         uses: actions/checkout@v3
         with:
